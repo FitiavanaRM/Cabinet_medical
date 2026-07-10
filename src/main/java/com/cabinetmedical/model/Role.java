@@ -1,4 +1,7 @@
 package com.cabinetmedical.model;
 
-public class Role {
+public enum Role {
+    ADMIN,
+    SECRETAIRE,
+    MEDECIN
 }
