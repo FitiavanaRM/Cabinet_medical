@@ -1,4 +1,7 @@
 package com.cabinetmedical.model;
 
-public class StatutRendezVous {
+public enum StatutRendezVous {
+    PREVU,
+    HONORE,
+    ANNULE
 }
