@@ -3,10 +3,10 @@ package com.cabinetmedical.model;
 import java.time.LocalDateTime;
 
 public class Utilisateur {
-    private int id,
-    private String login,
-    private String motDePasse,
-    private Role role,
+    private int id;
+    private String login;
+    private String motDePasse;
+    private Role role;
     private LocalDateTime dateCreation;
 
     public Utilisateur() {
