@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <database>
+        <host>localhost</host>
+        <port>3306</port>
+        <name>cabinet_medical</name>
+        <username>root</username>
+        <password></password>
+        <params>useSSL=false&amp;serverTimezone=Indian/Antananarivo&amp;allowPublicKeyRetrieval=true</params>
+    </database>
+</config>
