@@ -121,8 +121,6 @@ public class RendezVousDAO {
         return 0;
     }
 
-    // ---------- METHODES SUPPLEMENTAIRES POUR LES REGLES METIER ----------
-
     // Recupere l'historique des rendez-vous d patient
     public List<RendezVous> findByPatient(int idPatient) throws Exception {
         List<RendezVous> liste = new ArrayList<>();
