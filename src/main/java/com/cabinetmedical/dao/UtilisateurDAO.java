@@ -63,7 +63,7 @@ public class UtilisateurDAO {
     public void insert(Utilisateur utilisateur) throws Exception {
         String sql = "INSERT INTO utilisateur (login, mot_de_passe, role) VALUES (?, ?, ?)";
 
-        try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().connection.prepareStatement(sql)) {
+        try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(sql)) {
             preparedStatement.setString(1, utilisateur.getLogin());
             preparedStatement.setString(2, utilisateur.getMotDePasse());
             preparedStatement.setString(3, utilisateur.getRole().name());
