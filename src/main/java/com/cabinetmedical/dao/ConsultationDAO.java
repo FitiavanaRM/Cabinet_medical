@@ -96,7 +96,6 @@ public class ConsultationDAO {
         String sql = "SELECT COUNT(*) AS total FROM consultation WHERE id_rdv = ?";
 
          try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(sql)) {
-
             preparedStatement.setInt(1, idRdv);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
@@ -105,6 +104,30 @@ public class ConsultationDAO {
             }
         }
         return false;
+    }
+
+    // recupere la consultation liee au rdv
+    public Consultation findByRdv(int idRdv) throws Exception {
+        String sql = "SELECT * FROM consultation WHERE id_rdv = ?";
+
+        try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+            preparedStatement.setInt(1, idRdv);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    Consultation c = new Consultation(
+                            resultSet.getInt("id_consultation"),
+                            resultSet.getInt("id_rdv"),
+                            resultSet.getString("diagnostic"),
+                            resultSet.getString("ordonnance"),
+                            resultSet.getTimestamp("date_consultation").toLocalDateTime()
+                    );
+                    return c;
+                }
+            }
+        }
+
+        return null;
     }
 }
 
