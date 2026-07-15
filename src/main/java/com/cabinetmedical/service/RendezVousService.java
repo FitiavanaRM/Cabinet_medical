@@ -24,5 +24,8 @@ public class RendezVousService {
         return rendezVousDAO.findByPatient(idPatient);
     }
 
-    //
+    // donne le liste rdv du medecin
+    public List<RendezVous> listeRendezVousMedecin(int idMedecin) throws Exception {
+        return rendezVousDAO.findByMedecin(idMedecin);
+    }
 }
