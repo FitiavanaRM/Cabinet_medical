@@ -56,6 +56,19 @@ public class ConsultationDAO {
     }
 
     // insertion
+    public void insert(Consultation consultation) throws Exception {
+        String sql = "INSERT INTO consultation (id_rdv, diagnostic, ordonnance) VALUES (?, ?, ?)";
+
+        try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+            preparedStatement.setInt(1, consultation.getIdRdv());
+            preparedStatement.setString(2, consultation.getDiagnostic());
+            preparedStatement.setString(3, consultation.getOrdonnance());
+
+            preparedStatement.executeUpdate();
+        }
+    }
+
+    // modification
     public void update(Consultation consultation) throws Exception {
         String sql = "UPDATE consultation SET diagnostic = ?, ordonnance = ? WHERE id_consultation = ?";
         try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(sql)) {
