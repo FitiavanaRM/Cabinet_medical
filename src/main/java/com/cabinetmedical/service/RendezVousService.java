@@ -3,6 +3,7 @@ package com.cabinetmedical.service;
 
 import com.cabinetmedical.dao.RendezVousDAO;
 import com.cabinetmedical.model.RendezVous;
+import com.cabinetmedical.model.StatutRendezVous;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,7 +34,19 @@ public class RendezVousService {
 
     // creation d'un nouveau rendez vous
     public void creerRdv(RendezVous rdv) throws Exception {
+        validationRdv(rdv);
 
+        // disponibilite du medecin
+        if(!medecinService.estDisponible(rdv.getIdMedecin(), rdv.getDateRdv(), rdv.getHeureRdv())) {
+            throw new Exception("Le medecin n'est pas disponible a cette date et cette heure");
+        }
+        if (!medecinService.estDisponible(rdv.getIdMedecin(), rdv.getDateRdv(), rdv.getHeureRdv())) {
+            throw new Exception("Le medecin a deja un rendez vous a cette date et cette heure");
+        }
+
+        // sinon
+        rdv.setStatut(StatutRendezVous.PREVU);
+        rendezVousDAO.insert(rdv);
     }
 
     // validation
