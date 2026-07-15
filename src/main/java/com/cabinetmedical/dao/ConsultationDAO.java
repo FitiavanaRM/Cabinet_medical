@@ -36,7 +36,8 @@ public class ConsultationDAO {
     public Consultation findById(int id) throws Exception {
         String sql = "SELECT * FROM consultation WHERE id_consultation = ?";
 
-        try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
 
             try (ResultSet resultSet =  preparedStatement.executeQuery()) {
@@ -59,7 +60,8 @@ public class ConsultationDAO {
     public void insert(Consultation consultation) throws Exception {
         String sql = "INSERT INTO consultation (id_rdv, diagnostic, ordonnance) VALUES (?, ?, ?)";
 
-        try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, consultation.getIdRdv());
             preparedStatement.setString(2, consultation.getDiagnostic());
             preparedStatement.setString(3, consultation.getOrdonnance());
@@ -71,7 +73,8 @@ public class ConsultationDAO {
     // modification
     public void update(Consultation consultation) throws Exception {
         String sql = "UPDATE consultation SET diagnostic = ?, ordonnance = ? WHERE id_consultation = ?";
-        try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, consultation.getDiagnostic());
             preparedStatement.setString(2, consultation.getOrdonnance());
             preparedStatement.setInt(3, consultation.getId());
@@ -83,7 +86,8 @@ public class ConsultationDAO {
     // suppression
     public void delete(int id) throws Exception {
         String sql = "DELETE FROM consultation WHERE id_consultation = ?";
-        try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         }
@@ -108,7 +112,8 @@ public class ConsultationDAO {
     public boolean existsForRdv(int idRdv) throws Exception {
         String sql = "SELECT COUNT(*) AS total FROM consultation WHERE id_rdv = ?";
 
-         try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+         try (Connection connection = DatabaseConnection.getConnection();
+              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, idRdv);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
@@ -123,7 +128,8 @@ public class ConsultationDAO {
     public Consultation findByRdv(int idRdv) throws Exception {
         String sql = "SELECT * FROM consultation WHERE id_rdv = ?";
 
-        try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, idRdv);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
