@@ -10,8 +10,6 @@ import java.io.InputStream;
 // lire le fichier config.xml
 public class AppConfig {
 
-    //private static final String path = "config.xml";
-
     private String host;
     private String port;
     private String dbName;
