@@ -65,12 +65,13 @@ public class PatientDAO {
 
     // Insert un patient dans la base
     public void insert(Patient patient) throws Exception {
-        String sql = "INSERT INTO patient (nom, prenom, date_naissance, telephone, adresse, antecedents) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO patient (nom, prenom, date_naissance, telephone, adresse, antecedents) VALUES (?, ?, ?, ?, ?, ?)";
 
-        try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, patient.getNom());
             preparedStatement.setString(2, patient.getPrenom());
-            preparedStatement.setString(3, String.valueOf(Date.valueOf(patient.getDateNaissance())));
+            preparedStatement.setDate(3, Date.valueOf(patient.getDateNaissance()));
             preparedStatement.setString(4, patient.getTelephone());
             preparedStatement.setString(5, patient.getAdresse());
             preparedStatement.setString(6, patient.getAntecedents());
@@ -83,7 +84,8 @@ public class PatientDAO {
     public void update(Patient patient) throws Exception {
         String sql = "UPDATE patient SET nom = ?, prenom = ?, date_naissance = ?, telephone = ?, adresse = ?, antecedents = ? WHERE id_patient = ?";
 
-        try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setString(1, patient.getNom());
             preparedStatement.setString(2, patient.getPrenom());
@@ -101,7 +103,8 @@ public class PatientDAO {
     public void delete(int id) throws Exception {
         String sql = "DELETE FROM patient WHERE id_patient = ?";
 
-        try (PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setInt(1, id);
             statement.executeUpdate();

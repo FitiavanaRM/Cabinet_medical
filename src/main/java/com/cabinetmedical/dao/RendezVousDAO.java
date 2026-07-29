@@ -42,7 +42,8 @@ public class RendezVousDAO {
     public RendezVous findById(int id) throws Exception {
         String sql = "SELECT * FROM rendez_vous WHERE id_rdv = ?";
 
-        try (PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
 
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -67,7 +68,8 @@ public class RendezVousDAO {
     public void insert(RendezVous rdv) throws Exception {
         String sql = "INSERT INTO rendez_vous (id_patient, id_medecin, date_rdv, heure_rdv, motif, statut) VALUES (?, ?, ?, ?, ?, ?)";
 
-        try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, rdv.getIdPatient());
             preparedStatement.setInt(2, rdv.getIdMedecin());
             preparedStatement.setDate(3, Date.valueOf(rdv.getDateRdv()));
@@ -83,7 +85,8 @@ public class RendezVousDAO {
     public void update(RendezVous rdv) throws Exception {
         String sql = "UPDATE rendez_vous SET id_patient = ?, id_medecin = ?, date_rdv = ?, heure_rdv = ?, motif = ?, statut = ? WHERE id_rdv = ?";
 
-        try (PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, rdv.getIdPatient());
             statement.setInt(2, rdv.getIdMedecin());
             statement.setDate(3, Date.valueOf(rdv.getDateRdv()));
@@ -100,7 +103,8 @@ public class RendezVousDAO {
     public void delete(int id) throws Exception {
         String sql = "DELETE FROM rendez_vous WHERE id_rdv = ?";
 
-        try (PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
             statement.executeUpdate();
         }
@@ -126,7 +130,8 @@ public class RendezVousDAO {
         List<RendezVous> liste = new ArrayList<>();
         String sql = "SELECT * FROM rendez_vous WHERE id_patient = ? ORDER BY date_rdv, heure_rdv";
 
-        try (PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, idPatient);
 
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -152,7 +157,8 @@ public class RendezVousDAO {
         List<RendezVous> liste = new ArrayList<>();
         String sql = "SELECT * FROM rendez_vous WHERE id_medecin = ? ORDER BY date_rdv, heure_rdv";
 
-        try (PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, idMedecin);
 
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -177,7 +183,8 @@ public class RendezVousDAO {
     public boolean existeChevauchement(int idMedecin, java.time.LocalDate date, java.time.LocalTime heure) throws Exception {
         String sql = "SELECT COUNT(*) AS total FROM rendez_vous WHERE id_medecin = ? AND date_rdv = ? AND heure_rdv = ? AND statut != 'ANNULE'";
 
-        try (PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, idMedecin);
             statement.setDate(2, Date.valueOf(date));
             statement.setTime(3, Time.valueOf(heure));

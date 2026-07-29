@@ -40,7 +40,8 @@ public class UtilisateurDAO {
     public Utilisateur findById(int id) throws Exception {
         String sql = "SELECT * FROM utilisateur WHERE id_utilisateur = ?";
 
-        try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -63,7 +64,8 @@ public class UtilisateurDAO {
     public void insert(Utilisateur utilisateur) throws Exception {
         String sql = "INSERT INTO utilisateur (login, mot_de_passe, role) VALUES (?, ?, ?)";
 
-        try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, utilisateur.getLogin());
             preparedStatement.setString(2, utilisateur.getMotDePasse());
             preparedStatement.setString(3, utilisateur.getRole().name());
@@ -75,7 +77,8 @@ public class UtilisateurDAO {
     public void update(Utilisateur utilisateur) throws Exception {
         String sql = "UPDATE utilisateur SET login = ?, mot_de_passe = ?, role = ? WHERE id_utilisateur = ?";
 
-        try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, utilisateur.getLogin());
             preparedStatement.setString(2, utilisateur.getMotDePasse());
             preparedStatement.setString(3, utilisateur.getRole().name());
@@ -88,7 +91,8 @@ public class UtilisateurDAO {
     public void delete(int id) throws Exception {
         String sql = "DELETE FROM utilisateur WHERE id_utilisateur = ?";
 
-        try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         }
@@ -113,7 +117,8 @@ public class UtilisateurDAO {
     public Utilisateur findByLogin(String login) throws Exception {
         String sql = "SELECT * FROM utilisateur WHERE login = ?";
 
-        try (PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, login);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {

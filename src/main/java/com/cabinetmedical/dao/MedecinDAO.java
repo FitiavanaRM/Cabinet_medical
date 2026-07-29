@@ -44,7 +44,8 @@ public class MedecinDAO {
     public Medecin findById(int id) throws Exception {
         String sql = "SELECT * FROM medecin WHERE id_medecin = ?";
 
-        try (PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(sql)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setInt(1, id);
 

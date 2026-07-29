@@ -27,7 +27,7 @@ public class AppConfig {
 
     private void loadConfig() {
         try {
-            InputStream inputStream = getClass().getResourceAsStream("/config.xml");
+            InputStream inputStream = getClass().getResourceAsStream("/com/cabinetmedical/config/config.xml");
             if (inputStream == null) {
                 throw new RuntimeException("Fichier config.xml introuvable!");
             }

@@ -13,7 +13,7 @@ CREATE TABLE utilisateur (
 
 CREATE TABLE medecin (
     id_medecin INT AUTO_INCREMENT PRIMARY KEY,
-    id_utilisateur INT NOT NULL,
+    id_utilisateur INT,
     nom VARCHAR(100) NOT NULL,
     prenom VARCHAR(100) NOT NULL,
     specialite VARCHAR(100) NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE patient (
     antecedents TEXT
 );
 
-REATE TABLE rendez_vous (
+CREATE TABLE rendez_vous (
     id_rdv INT AUTO_INCREMENT PRIMARY KEY,
     id_patient INT NOT NULL,
     id_medecin INT NOT NULL,
