@@ -17,7 +17,6 @@ CREATE TABLE medecin (
     nom VARCHAR(100) NOT NULL,
     prenom VARCHAR(100) NOT NULL,
     specialite VARCHAR(100) NOT NULL,
-    telephone VARCHAR(50),
     email VARCHAR(100),
     jours_disponibles VARCHAR(100) NOT NULL DEFAULT 'Lundi, Mardi, Mercredi, Jeudi, Vendredi',
     heure_debut_dispo TIME NOT NULL DEFAULT '08:00:00',
@@ -76,9 +75,9 @@ INSERT INTO utilisateur (login, mot_de_passe, role) VALUES
     ('secretaire', 'secret123', 'SECRETAIRE'),
     ('Dr Hery', 'medecin123', 'MEDECIN');
 
-INSERT INTO medecin (id_utilisateur, nom, prenom, specialite, telephone, email, jours_disponibles, heure_debut_dispo, heure_fin_dispo) VALUES
-    (NULL, 'Rotsy', 'Nomena', 'Medecin generale', '0389154855', 'rotsynomena9@gmail.com', 'Lundi, Mardi, Mercredi, Jeudi, Vendredi', '08:00:00', '18:00:00'),
-    (3, 'Hery', 'Joseph', 'Cardiologie', '0341326685', 'heryjoseph@gmail.com', 'Lundi, Mercredi, Vendredi', '09:00:00', '16:00:00');
+INSERT INTO medecin (id_utilisateur, nom, prenom, specialite, email, jours_disponibles, heure_debut_dispo, heure_fin_dispo) VALUES
+    (NULL, 'Rotsy', 'Nomena', 'Medecin generale',  'rotsynomena9@gmail.com', 'Lundi, Mardi, Mercredi, Jeudi, Vendredi', '08:00:00', '18:00:00'),
+    (3, 'Hery', 'Joseph', 'Cardiologie','heryjoseph@gmail.com', 'Lundi, Mercredi, Vendredi', '09:00:00', '16:00:00');
 
 INSERT INTO patient (nom, prenom, date_naissance, telephone, adresse, antecedents) VALUES
     ('Malalaniavo', 'Valisoa', '2005-02-03', '0381906779', 'Ambihibary', 'Asthme leger'),
