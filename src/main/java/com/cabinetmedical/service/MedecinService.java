@@ -91,6 +91,9 @@ public class MedecinService {
         if (medecin.getSpecialite() == null || medecin.getSpecialite().trim().isEmpty()) {
             throw new Exception("La specialite du medecin est obligatoire.");
         }
+        if (medecin.getTelephone() == null || medecin.getTelephone().trim().isEmpty()) {
+            throw new Exception("Le telephone du medecin est obligatoire.");
+        }
         if (medecin.getJoursDisponibles() == null || medecin.getJoursDisponibles().trim().isEmpty()) {
             throw new Exception("Les jours de disponibilite sont obligatoires.");
         }

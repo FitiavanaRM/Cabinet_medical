@@ -34,6 +34,7 @@ public class MedecinController implements Initializable {
     @FXML private TableColumn<Medecin, String> colPrenom;
     @FXML private TableColumn<Medecin, String> colSpecialite;
     @FXML private TableColumn<Medecin, String> colTelephone;
+    @FXML private TableColumn<Medecin, String> colEmail;
 
     @FXML private TextField champNom;
     @FXML private TextField champPrenom;
@@ -54,6 +55,8 @@ public class MedecinController implements Initializable {
         colNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
         colPrenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         colSpecialite.setCellValueFactory(new PropertyValueFactory<>("specialite"));
+        colTelephone.setCellValueFactory(new PropertyValueFactory<>("telephone"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
 
         tableMedecins.setItems(listeMedecins);
 
@@ -81,6 +84,7 @@ public class MedecinController implements Initializable {
         champNom.setText(medecin.getNom());
         champPrenom.setText(medecin.getPrenom());
         champSpecialite.setText(medecin.getSpecialite());
+        champTelephone.setText(medecin.getTelephone());
         champEmail.setText(medecin.getEmail());
         champJoursDisponibles.setText(medecin.getJoursDisponibles());
         champHeureDebut.setText(medecin.getHeureDebutDispo().toString());
@@ -125,6 +129,7 @@ public class MedecinController implements Initializable {
         medecin.setNom(champNom.getText());
         medecin.setPrenom(champPrenom.getText());
         medecin.setSpecialite(champSpecialite.getText());
+        medecin.setTelephone(champTelephone.getText());
         medecin.setEmail(champEmail.getText());
         medecin.setJoursDisponibles(champJoursDisponibles.getText());
         medecin.setHeureDebutDispo(heureDebut);

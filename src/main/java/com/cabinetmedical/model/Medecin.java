@@ -8,6 +8,7 @@ public class Medecin {
     private String nom;
     private String prenom;
     private String specialite;
+    private String telephone;
     private String email;
     private String joursDisponibles;
     private LocalTime heureDebutDispo;
@@ -16,12 +17,13 @@ public class Medecin {
     public Medecin() {
     }
 
-    public Medecin(int id, Integer idUtilisateur, String nom, String prenom, String specialite, String email, String joursDisponibles, LocalTime heureDebutDispo, LocalTime heureFinDispo) {
+    public Medecin(int id, Integer idUtilisateur, String nom, String prenom, String specialite, String telephone, String email, String joursDisponibles, LocalTime heureDebutDispo, LocalTime heureFinDispo) {
         this.id = id;
         this.idUtilisateur = idUtilisateur;
         this.nom = nom;
         this.prenom = prenom;
         this.specialite = specialite;
+        this.telephone = telephone;
         this.email = email;
         this.joursDisponibles = joursDisponibles;
         this.heureDebutDispo = heureDebutDispo;
@@ -68,6 +70,14 @@ public class Medecin {
         this.specialite = specialite;
     }
 
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -108,6 +118,7 @@ public class Medecin {
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", specialite='" + specialite + '\'' +
+                ", telephone='" + telephone + '\'' +
                 ", email='" + email + '\'' +
                 ", joursDisponibles='" + joursDisponibles + '\'' +
                 ", heureDebutDispo=" + heureDebutDispo +
