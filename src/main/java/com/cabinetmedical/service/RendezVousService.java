@@ -37,14 +37,13 @@ public class RendezVousService {
         validationRdv(rdv);
 
         // disponibilite du medecin
-        if(!medecinService.estDisponible(rdv.getIdMedecin(), rdv.getDateRdv(), rdv.getHeureRdv())) {
-            throw new Exception("Le medecin n'est pas disponible a cette date et cette heure");
-        }
         if (!medecinService.estDisponible(rdv.getIdMedecin(), rdv.getDateRdv(), rdv.getHeureRdv())) {
-            throw new Exception("Le medecin a deja un rendez vous a cette date et cette heure");
+            throw new Exception("Le medecin n'est pas disponible a cette date et cette heure.");
+        }
+        if (rendezVousDAO.existeChevauchement(rdv.getIdMedecin(), rdv.getDateRdv(), rdv.getHeureRdv())) {
+            throw new Exception("Le medecin a deja un rendez-vous a cette date et cette heure.");
         }
 
-        // sinon
         rdv.setStatut(StatutRendezVous.PREVU);
         rendezVousDAO.insert(rdv);
     }
