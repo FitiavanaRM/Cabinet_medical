@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.cabinetmedical.controller.RendezVousController">
+
+    <top>
+        <HBox spacing="10" style="-fx-padding: 10;">
+            <Button text="Retour" onAction="#onRetour"/>
+            <Label text="Gestion des Rendez-vous" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+        </HBox>
+    </top>
+
+    <center>
+        <TableView fx:id="tableRendezVous">
+            <columns>
+                <TableColumn fx:id="colId" text="Id" prefWidth="40"/>
+                <TableColumn fx:id="colPatient" text="Patient" prefWidth="120"/>
+                <TableColumn fx:id="colMedecin" text="Medecin" prefWidth="120"/>
+                <TableColumn fx:id="colDate" text="Date" prefWidth="100"/>
+                <TableColumn fx:id="colHeure" text="Heure" prefWidth="100"/>
+                <TableColumn fx:id="colStatut" text="Statut" prefWidth="100"/>
+            </columns>
+        </TableView>
+    </center>
+
+    <right>
+        <VBox spacing="8" prefWidth="320">
+            <padding>
+                <Insets top="10" bottom="10" left="10" right="10"/>
+            </padding>
+
+            <Label text="Id Patient"/>
+            <TextField fx:id="champPatient"/>
+
+            <Label text="Id Medecin"/>
+            <TextField fx:id="champMedecin"/>
+
+            <Label text="Date"/>
+            <DatePicker fx:id="champDate"/>
+
+            <Label text="Heure (HH:mm)"/>
+            <TextField fx:id="champHeure" promptText="15:00"/>
+
+            <Label text="Motif"/>
+            <TextArea fx:id="champMotif" prefRowCount="3"/>
+
+            <Button text="Nouveau" onAction="#onNouveau" maxWidth="Infinity"/>
+            <Button text="Ajouter" onAction="#onAjouter" maxWidth="Infinity"/>
+            <Button text="Modifier" onAction="#onModifier" maxWidth="Infinity"/>
+            <Button text="Supprimer" onAction="#onSupprimer" maxWidth="Infinity"/>
+        </VBox>
+    </right>
+
+</BorderPane>

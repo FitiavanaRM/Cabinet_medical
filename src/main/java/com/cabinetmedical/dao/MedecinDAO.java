@@ -28,6 +28,7 @@ public class MedecinDAO {
                         resultSet.getString("nom"),
                         resultSet.getString("prenom"),
                         resultSet.getString("specialite"),
+                        resultSet.getString("telephone"),
                         resultSet.getString("email"),
                         resultSet.getString("jours_disponibles"),
                         resultSet.getTime("heure_debut_dispo").toLocalTime(),
@@ -55,6 +56,7 @@ public class MedecinDAO {
                             resultSet.getString("nom"),
                             resultSet.getString("prenom"),
                             resultSet.getString("specialite"),
+                            resultSet.getString("telephone"),
                             resultSet.getString("email"),
                             resultSet.getString("jours_disponibles"),
                             resultSet.getTime("heure_debut_dispo").toLocalTime(),
@@ -78,6 +80,7 @@ public class MedecinDAO {
             preparedStatement.setString(2, medecin.getNom());
             preparedStatement.setString(3, medecin.getPrenom());
             preparedStatement.setString(4, medecin.getSpecialite());
+            preparedStatement.setString(5, medecin.getTelephone());
             preparedStatement.setString(6, medecin.getEmail());
             preparedStatement.setString(7, medecin.getJoursDisponibles());
             preparedStatement.setTime(8, Time.valueOf(medecin.getHeureDebutDispo()));
@@ -100,6 +103,7 @@ public class MedecinDAO {
             preparedStatement.setString(2, medecin.getNom());
             preparedStatement.setString(3, medecin.getPrenom());
             preparedStatement.setString(4, medecin.getSpecialite());
+            preparedStatement.setString(5, medecin.getTelephone());
             preparedStatement.setString(6, medecin.getEmail());
             preparedStatement.setString(7, medecin.getJoursDisponibles());
             preparedStatement.setTime(8, Time.valueOf(medecin.getHeureDebutDispo()));
