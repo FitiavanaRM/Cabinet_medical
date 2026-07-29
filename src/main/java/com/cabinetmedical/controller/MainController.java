@@ -61,8 +61,13 @@ public class MainController {
     }
 
     @FXML
-    private void onRapports() {
-        AlertUtil.afficherErreur("Ecran Rapports pas encore implemente.");
+    private void onRapports(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/cabinetmedical/fxml/rapport.fxml"));
+        Parent racine = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(racine));
+        stage.setTitle("Systeme de Gestion de Cabinet Medical");
     }
 
     // Ferme la session et revient a l'ecran de connexion
