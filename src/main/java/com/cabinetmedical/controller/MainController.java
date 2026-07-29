@@ -18,7 +18,6 @@ public class MainController {
 
     @FXML
     private Label labelUtilisateurConnecte;
-
     private Utilisateur utilisateurConnecte;
 
     public void setUtilisateurConnecte(Utilisateur utilisateur) {
@@ -27,8 +26,13 @@ public class MainController {
     }
 
     @FXML
-    private void onPatients() {
-        AlertUtil.afficherErreur("Ecran Patients pas encore implemente.");
+    private void onPatients(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/cabinetmedical/fxml/patient.fxml"));
+        Parent racine = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(racine));
+        stage.setTitle("Systeme de Gestion de Cabinet Medical");
     }
 
     @FXML
