@@ -36,8 +36,13 @@ public class MainController {
     }
 
     @FXML
-    private void onMedecins() {
-        AlertUtil.afficherErreur("Ecran Medecins pas encore implemente.");
+    private void onMedecins(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/cabinetmedical/fxml/medecin.fxml"));
+        Parent racine = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(racine));
+        stage.setTitle("Systeme de Gestion de Cabinet Medical");
     }
 
     @FXML
