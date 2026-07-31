@@ -66,14 +66,19 @@ public class MedecinService {
             throw new Exception("Medecin introuvable.");
         }
 
-        // Jour
+        if (medecin.getJoursDisponibles() == null || medecin.getJoursDisponibles().isBlank()) {
+            return false;
+        }
+
         String jourDemande = convertirJourEnFrancais(date.getDayOfWeek());
-        List<String> joursDisponibles = Arrays.asList(medecin.getJoursDisponibles().split(","));
+        List<String> joursDisponibles = Arrays.stream(medecin.getJoursDisponibles().split(","))
+                .map(String::trim)
+                .toList();
+
         if (!joursDisponibles.contains(jourDemande)) {
             return false;
         }
 
-        // Heure
         if (heure.isBefore(medecin.getHeureDebutDispo()) || heure.isAfter(medecin.getHeureFinDispo())) {
             return false;
         }

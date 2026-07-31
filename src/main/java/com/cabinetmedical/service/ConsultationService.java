@@ -28,7 +28,6 @@ public class ConsultationService {
     public void creerConsultation(Consultation consultation) throws Exception {
         validerConsultation(consultation);
 
-        // Regle metier
         RendezVous rdv = rendezVousDAO.findById(consultation.getIdRdv());
         if (rdv == null) {
             throw new Exception("Rendez-vous introuvable.");
@@ -41,6 +40,7 @@ public class ConsultationService {
         if (consultationDAO.existsForRdv(consultation.getIdRdv())) {
             throw new Exception("Ce rendez-vous a deja une consultation associee.");
         }
+
         consultationDAO.insert(consultation);
     }
 
