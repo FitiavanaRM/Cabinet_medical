@@ -1,0 +1,169 @@
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-background-color: linear-gradient(to bottom, #121b2a 0%, #1b2636 100%);
+}
+
+BorderPane {
+    -fx-background-color: linear-gradient(to bottom, #121b2a 0%, #1b2636 100%);
+}
+
+Label {
+    -fx-text-fill: #dfeaf8;
+}
+
+Button {
+    -fx-background-color: linear-gradient(to bottom, #4f8ef7 0%, #3b6fd1 100%);
+    -fx-text-fill: #edf4ff;
+    -fx-font-weight: bold;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-padding: 8 16 8 16;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(79, 142, 247, 0.25), 8, 0.25, 0, 2);
+}
+
+Button:hover {
+    -fx-background-color: linear-gradient(to bottom, #6aa3ff 0%, #4e81e6 100%);
+}
+
+Button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #2d6ad2 0%, #214eb4 100%);
+}
+
+TextField,
+PasswordField,
+TextArea,
+DatePicker,
+ComboBox,
+ChoiceBox {
+    -fx-background-color: #1d2b3d;
+    -fx-border-color: #37557d;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 7 10 7 10;
+    -fx-text-fill: #edf4ff;
+    -fx-prompt-text-fill: #9ab2d0;
+}
+
+TextField:focused,
+PasswordField:focused,
+TextArea:focused,
+DatePicker:focused,
+ComboBox:focused,
+ChoiceBox:focused {
+    -fx-border-color: #7fb1ff;
+    -fx-effect: dropshadow(gaussian, rgba(127, 177, 255, 0.25), 8, 0.25, 0, 0);
+}
+
+TextArea {
+    -fx-wrap-text: true;
+}
+
+VBox,
+HBox {
+    -fx-spacing: 8;
+}
+
+.login-card {
+    -fx-background-color: rgba(20, 29, 41, 0.9);
+    -fx-background-radius: 20;
+    -fx-padding: 26;
+    -fx-border-color: #3a4f6e;
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.28), 20, 0.25, 0, 8);
+}
+
+.login-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #e8f0ff;
+}
+
+TableView {
+    -fx-background-color: #1a2434;
+    -fx-border-color: #334d70;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.18), 8, 0.2, 0, 2);
+    -fx-text-fill: #ebf3ff;
+}
+
+TableView .column-header {
+    -fx-background-color: linear-gradient(to bottom, #243a51 0%, #1d2d40 100%);
+    -fx-border-color: #31496a;
+}
+
+TableView .column-header .label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #edf4ff;
+}
+
+TableView .table-row-cell {
+    -fx-background-color: #1d2b3d;
+    -fx-text-fill: #edf4ff;
+}
+
+TableView .table-row-cell:selected {
+    -fx-background-color: #2d527f;
+    -fx-text-fill: white;
+}
+
+TableView .table-cell {
+    -fx-padding: 7 8 7 8;
+}
+
+#champLogin,
+#champMotDePasse,
+#champNom,
+#champPrenom,
+#champTelephone,
+#champSpecialite,
+#champEmail,
+#champJoursDisponibles,
+#champHeureDebut,
+#champHeureFin,
+#champPatient,
+#champMedecin,
+#champHeure,
+#champRdv {
+    -fx-pref-height: 34px;
+}
+
+#labelUtilisateurConnecte {
+    -fx-font-weight: bold;
+    -fx-text-fill: #edf4ff;
+}
+
+#champLogin,
+#champMotDePasse {
+    -fx-pref-width: 220px;
+}
+
+#champDiagnostic,
+#champOrdonnance,
+#champAntecedents,
+#champMotif {
+    -fx-padding: 8;
+}
+
+.toast {
+    -fx-background-color: rgba(30, 41, 59, 0.96);
+    -fx-text-fill: #edf4ff;
+    -fx-font-weight: bold;
+    -fx-background-radius: 12;
+    -fx-padding: 10 16 10 16;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 12, 0.2, 0, 4);
+}
+
+.toast--success {
+    -fx-background-color: rgba(17, 94, 89, 0.96);
+}
+
+.toast--error {
+    -fx-background-color: rgba(127, 29, 29, 0.96);
+}
+
+.toast--info {
+    -fx-background-color: rgba(30, 64, 175, 0.96);
+}

@@ -1,5 +1,6 @@
 package com.cabinetmedical;
 
+import com.cabinetmedical.util.ThemeManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +17,9 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/cabinetmedical/fxml/login.fxml"));
         Parent root = loader.load();
 
-        primaryStage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        ThemeManager.applyToScene(scene);
+        primaryStage.setScene(scene);
         primaryStage.setTitle("Systeme de Gestion de Cabinet Medical");
         primaryStage.show();
     }

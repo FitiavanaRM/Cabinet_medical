@@ -11,47 +11,51 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.cabinetmedical.controller.ConsultationController">
+<StackPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+           fx:id="rootPane"
+           fx:controller="com.cabinetmedical.controller.ConsultationController"
+           stylesheets="@../css/style.css">
+    <children>
+        <BorderPane>
+            <top>
+                <HBox spacing="10" style="-fx-padding: 10;">
+                    <Button text="Retour" onAction="#onRetour"/>
+                    <Label text="Gestion des Consultations" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                </HBox>
+            </top>
 
-    <top>
-        <HBox spacing="10" style="-fx-padding: 10;">
-            <Button text="Retour" onAction="#onRetour"/>
-            <Label text="Gestion des Consultations" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
-        </HBox>
-    </top>
+            <center>
+                <TableView fx:id="tableConsultations">
+                    <columns>
+                        <TableColumn fx:id="colId" text="Id" prefWidth="50"/>
+                        <TableColumn fx:id="colRdv" text="Id Rendez-vous" prefWidth="120"/>
+                        <TableColumn fx:id="colDiagnostic" text="Diagnostic" prefWidth="250"/>
+                        <TableColumn fx:id="colDateConsultation" text="Date de consultation" prefWidth="180"/>
+                    </columns>
+                </TableView>
+            </center>
 
-    <center>
-        <TableView fx:id="tableConsultations">
-            <columns>
-                <TableColumn fx:id="colId" text="Id" prefWidth="50"/>
-                <TableColumn fx:id="colRdv" text="Id Rendez-vous" prefWidth="120"/>
-                <TableColumn fx:id="colDiagnostic" text="Diagnostic" prefWidth="250"/>
-                <TableColumn fx:id="colDateConsultation" text="Date de consultation" prefWidth="180"/>
-            </columns>
-        </TableView>
-    </center>
+            <right>
+                <VBox spacing="8" prefWidth="300">
+                    <padding>
+                        <Insets top="10" bottom="10" left="10" right="10"/>
+                    </padding>
 
-    <right>
-        <VBox spacing="8" prefWidth="300">
-            <padding>
-                <Insets top="10" bottom="10" left="10" right="10"/>
-            </padding>
+                    <Label text="Id Rendez-vous"/>
+                    <TextField fx:id="champRdv"/>
 
-            <Label text="Id Rendez-vous"/>
-            <TextField fx:id="champRdv"/>
+                    <Label text="Diagnostic"/>
+                    <TextArea fx:id="champDiagnostic" prefRowCount="4"/>
 
-            <Label text="Diagnostic"/>
-            <TextArea fx:id="champDiagnostic" prefRowCount="4"/>
+                    <Label text="Ordonnance"/>
+                    <TextArea fx:id="champOrdonnance" prefRowCount="4"/>
 
-            <Label text="Ordonnance"/>
-            <TextArea fx:id="champOrdonnance" prefRowCount="4"/>
-
-            <Button text="Nouveau" onAction="#onNouveau" maxWidth="Infinity"/>
-            <Button text="Ajouter" onAction="#onAjouter" maxWidth="Infinity"/>
-            <Button text="Modifier" onAction="#onModifier" maxWidth="Infinity"/>
-            <Button text="Supprimer" onAction="#onSupprimer" maxWidth="Infinity"/>
-        </VBox>
-    </right>
-
-</BorderPane>
+                    <Button text="Nouveau" onAction="#onNouveau" maxWidth="Infinity"/>
+                    <Button text="Ajouter" onAction="#onAjouter" maxWidth="Infinity"/>
+                    <Button text="Modifier" onAction="#onModifier" maxWidth="Infinity"/>
+                    <Button text="Supprimer" onAction="#onSupprimer" maxWidth="Infinity"/>
+                </VBox>
+            </right>
+        </BorderPane>
+    </children>
+</StackPane>

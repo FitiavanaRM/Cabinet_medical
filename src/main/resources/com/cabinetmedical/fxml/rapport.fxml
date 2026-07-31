@@ -9,7 +9,8 @@
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.cabinetmedical.controller.RapportController">
+            fx:controller="com.cabinetmedical.controller.RapportController"
+            stylesheets="@../css/style.css">
 
     <top>
         <HBox spacing="10" style="-fx-padding: 10;">

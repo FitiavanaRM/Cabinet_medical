@@ -10,65 +10,69 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.cabinetmedical.controller.MedecinController">
+<StackPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+           fx:id="rootPane"
+           fx:controller="com.cabinetmedical.controller.MedecinController"
+           stylesheets="@../css/style.css">
+    <children>
+        <BorderPane>
+            <top>
+                <HBox spacing="10" style="-fx-padding: 10;">
+                    <Button text="Retour" onAction="#onRetour"/>
+                    <Label text="Gestion des Medecins" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                </HBox>
+            </top>
 
-    <top>
-        <HBox spacing="10" style="-fx-padding: 10;">
-            <Button text="Retour" onAction="#onRetour"/>
-            <Label text="Gestion des Medecins" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
-        </HBox>
-    </top>
+            <center>
+                <TableView fx:id="tableMedecins">
+                    <columns>
+                        <TableColumn fx:id="colId" text="Id" prefWidth="40"/>
+                        <TableColumn fx:id="colNom" text="Nom" prefWidth="100"/>
+                        <TableColumn fx:id="colPrenom" text="Prenom" prefWidth="100"/>
+                        <TableColumn fx:id="colSpecialite" text="Specialite" prefWidth="130"/>
+                        <TableColumn fx:id="colTelephone" text="Telephone" prefWidth="120"/>
+                        <TableColumn fx:id="colEmail" text="Email" prefWidth="150"/>
+                    </columns>
+                </TableView>
+            </center>
 
-    <center>
-        <TableView fx:id="tableMedecins">
-            <columns>
-                <TableColumn fx:id="colId" text="Id" prefWidth="40"/>
-                <TableColumn fx:id="colNom" text="Nom" prefWidth="100"/>
-                <TableColumn fx:id="colPrenom" text="Prenom" prefWidth="100"/>
-                <TableColumn fx:id="colSpecialite" text="Specialite" prefWidth="130"/>
-                <TableColumn fx:id="colTelephone" text="Telephone" prefWidth="120"/>
-                <TableColumn fx:id="colEmail" text="Email" prefWidth="150"/>
-            </columns>
-        </TableView>
-    </center>
+            <right>
+                <VBox spacing="8" prefWidth="270">
+                    <padding>
+                        <Insets top="10" bottom="10" left="10" right="10"/>
+                    </padding>
 
-    <right>
-        <VBox spacing="8" prefWidth="270">
-            <padding>
-                <Insets top="10" bottom="10" left="10" right="10"/>
-            </padding>
+                    <Label text="Nom"/>
+                    <TextField fx:id="champNom"/>
 
-            <Label text="Nom"/>
-            <TextField fx:id="champNom"/>
+                    <Label text="Prenom"/>
+                    <TextField fx:id="champPrenom"/>
 
-            <Label text="Prenom"/>
-            <TextField fx:id="champPrenom"/>
+                    <Label text="Specialite"/>
+                    <TextField fx:id="champSpecialite"/>
 
-            <Label text="Specialite"/>
-            <TextField fx:id="champSpecialite"/>
+                    <Label text="Telephone"/>
+                    <TextField fx:id="champTelephone"/>
 
-            <Label text="Telephone"/>
-            <TextField fx:id="champTelephone"/>
+                    <Label text="Email"/>
+                    <TextField fx:id="champEmail"/>
 
-            <Label text="Email"/>
-            <TextField fx:id="champEmail"/>
+                    <Label text="Jours disponibles (ex: Lundi,Mardi,Mercredi)"/>
+                    <TextField fx:id="champJoursDisponibles"/>
 
-            <Label text="Jours disponibles (ex: Lundi,Mardi,Mercredi)"/>
-            <TextField fx:id="champJoursDisponibles"/>
+                    <Label text="Heure debut (HH:mm)"/>
+                    <TextField fx:id="champHeureDebut" promptText="08:00"/>
 
-            <Label text="Heure debut (HH:mm)"/>
-            <TextField fx:id="champHeureDebut" promptText="08:00"/>
+                    <Label text="Heure fin (HH:mm)"/>
+                    <TextField fx:id="champHeureFin" promptText="17:00"/>
 
-            <Label text="Heure fin (HH:mm)"/>
-            <TextField fx:id="champHeureFin" promptText="17:00"/>
+                    <Button text="Nouveau" onAction="#onNouveau" maxWidth="Infinity"/>
+                    <Button text="Ajouter" onAction="#onAjouter" maxWidth="Infinity"/>
+                    <Button text="Modifier" onAction="#onModifier" maxWidth="Infinity"/>
+                    <Button text="Supprimer" onAction="#onSupprimer" maxWidth="Infinity"/>
 
-            <Button text="Nouveau" onAction="#onNouveau" maxWidth="Infinity"/>
-            <Button text="Ajouter" onAction="#onAjouter" maxWidth="Infinity"/>
-            <Button text="Modifier" onAction="#onModifier" maxWidth="Infinity"/>
-            <Button text="Supprimer" onAction="#onSupprimer" maxWidth="Infinity"/>
-
-        </VBox>
-    </right>
-
-</BorderPane>
+                </VBox>
+            </right>
+        </BorderPane>
+    </children>
+</StackPane>

@@ -3,6 +3,7 @@ package com.cabinetmedical.controller;
 import com.cabinetmedical.model.StatutRendezVous;
 import com.cabinetmedical.service.RapportService;
 import com.cabinetmedical.util.AlertUtil;
+import com.cabinetmedical.util.ThemeManager;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -93,7 +94,9 @@ public class RapportController implements Initializable {
         Parent racine = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(racine));
+        Scene scene = new Scene(racine);
+        ThemeManager.applyToScene(scene);
+        stage.setScene(scene);
         stage.setTitle("Systeme de Gestion de Cabinet Medical");
     }
 }

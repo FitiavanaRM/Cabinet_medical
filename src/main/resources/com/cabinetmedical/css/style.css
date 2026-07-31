@@ -1,0 +1,162 @@
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-background-color: linear-gradient(to bottom, #eef5ff 0%, #f7fafc 100%);
+}
+
+BorderPane {
+    -fx-background-color: linear-gradient(to bottom, #eef5ff 0%, #f7fafc 100%);
+}
+
+Label {
+    -fx-text-fill: #21354d;
+}
+
+Button {
+    -fx-background-color: linear-gradient(to bottom, #3b82f6 0%, #2f6ed1 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-padding: 8 16 8 16;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(47, 110, 209, 0.2), 8, 0.2, 0, 2);
+}
+
+Button:hover {
+    -fx-background-color: linear-gradient(to bottom, #4d92ff 0%, #3d7fe0 100%);
+}
+
+Button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #2b67c5 0%, #244f9d 100%);
+}
+
+TextField,
+PasswordField,
+TextArea,
+DatePicker,
+ComboBox,
+ChoiceBox {
+    -fx-background-color: white;
+    -fx-border-color: #cfe0ff;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 7 10 7 10;
+    -fx-text-fill: #1d2c3d;
+}
+
+TextField:focused,
+PasswordField:focused,
+TextArea:focused,
+DatePicker:focused,
+ComboBox:focused,
+ChoiceBox:focused {
+    -fx-border-color: #4d8cf5;
+    -fx-effect: dropshadow(gaussian, rgba(77, 140, 245, 0.14), 8, 0.2, 0, 0);
+}
+
+TextArea {
+    -fx-wrap-text: true;
+}
+
+VBox,
+HBox {
+    -fx-spacing: 8;
+}
+
+.login-card {
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-background-radius: 18;
+    -fx-padding: 26;
+    -fx-border-color: #dfeaff;
+    -fx-border-width: 1;
+    -fx-border-radius: 18;
+    -fx-effect: dropshadow(gaussian, rgba(44, 88, 140, 0.14), 18, 0.25, 0, 6);
+}
+
+.login-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1f3d66;
+}
+
+TableView {
+    -fx-background-color: white;
+    -fx-border-color: #d7e4f7;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(64, 91, 123, 0.08), 8, 0.2, 0, 2);
+}
+
+TableView .column-header {
+    -fx-background-color: linear-gradient(to bottom, #eaf2ff 0%, #dfeeff 100%);
+    -fx-border-color: #d3dff3;
+}
+
+TableView .column-header .label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e3552;
+}
+
+TableView .table-row-cell:selected {
+    -fx-background-color: #dfeeff;
+    -fx-text-fill: #12304d;
+}
+
+TableView .table-cell {
+    -fx-padding: 7 8 7 8;
+}
+
+#champLogin,
+#champMotDePasse,
+#champNom,
+#champPrenom,
+#champTelephone,
+#champSpecialite,
+#champEmail,
+#champJoursDisponibles,
+#champHeureDebut,
+#champHeureFin,
+#champPatient,
+#champMedecin,
+#champHeure,
+#champRdv {
+    -fx-pref-height: 34px;
+}
+
+#labelUtilisateurConnecte {
+    -fx-font-weight: bold;
+    -fx-text-fill: #dfeaf8;
+}
+
+#champLogin,
+#champMotDePasse {
+    -fx-pref-width: 220px;
+}
+
+#champDiagnostic,
+#champOrdonnance,
+#champAntecedents,
+#champMotif {
+    -fx-padding: 8;
+}
+
+.toast {
+    -fx-background-color: rgba(29, 44, 61, 0.92);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 12;
+    -fx-padding: 10 16 10 16;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.2, 0, 4);
+}
+
+.toast--success {
+    -fx-background-color: rgba(18, 110, 78, 0.92);
+}
+
+.toast--error {
+    -fx-background-color: rgba(156, 35, 31, 0.92);
+}
+
+.toast--info {
+    -fx-background-color: rgba(31, 61, 102, 0.92);
+}

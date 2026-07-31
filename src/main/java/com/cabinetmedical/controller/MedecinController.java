@@ -2,7 +2,8 @@ package com.cabinetmedical.controller;
 
 import com.cabinetmedical.model.Medecin;
 import com.cabinetmedical.service.MedecinService;
-import com.cabinetmedical.util.AlertUtil;
+import com.cabinetmedical.util.ThemeManager;
+import com.cabinetmedical.util.Toast;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -44,6 +45,7 @@ public class MedecinController implements Initializable {
     @FXML private TextField champJoursDisponibles;
     @FXML private TextField champHeureDebut;
     @FXML private TextField champHeureFin;
+    @FXML private javafx.scene.layout.StackPane rootPane;
 
     private MedecinService medecinService = new MedecinService();
     private ObservableList<Medecin> listeMedecins = FXCollections.observableArrayList();
@@ -74,7 +76,7 @@ public class MedecinController implements Initializable {
         try {
             listeMedecins.setAll(medecinService.listerTousMedecins());
         } catch (Exception e) {
-            AlertUtil.afficherErreur("Impossible de charger les medecins : " + e.getMessage());
+            Toast.error(rootPane, "Impossible de charger les médecins : " + e.getMessage());
         }
     }
 
@@ -115,7 +117,7 @@ public class MedecinController implements Initializable {
             heureDebut = LocalTime.parse(champHeureDebut.getText());
             heureFin = LocalTime.parse(champHeureFin.getText());
         } catch (DateTimeParseException e) {
-            AlertUtil.afficherErreur("Format d'heure invalide. Utilisez le format HH:mm (ex: 08:00).");
+            Toast.error(rootPane, "Format d'heure invalide. Utilisez le format HH:mm (ex: 08:00).");
             return null;
         }
 
@@ -143,18 +145,19 @@ public class MedecinController implements Initializable {
     private void onAjouter() {
         Medecin medecin = construireMedecinDepuisFormulaire();
         if (medecin == null) {
+            Toast.error(rootPane, "Format d'heure invalide. Utilisez HH:mm.");
             return;
         }
 
         try {
             medecinService.ajouterMedecin(medecin);
 
-            AlertUtil.afficherSucces("Medecin ajoute avec succes.");
+            Toast.success(rootPane, "Médecin ajouté avec succès.");
             chargerMedecins();
             onNouveau();
 
         } catch (Exception e) {
-            AlertUtil.afficherErreur(e.getMessage());
+            Toast.error(rootPane, e.getMessage());
         }
     }
 
@@ -162,23 +165,24 @@ public class MedecinController implements Initializable {
     @FXML
     private void onModifier() {
         if (medecinSelectionne == null) {
-            AlertUtil.afficherErreur("Selectionnez d'abord un medecin dans le tableau.");
+            Toast.error(rootPane, "Sélectionnez d'abord un médecin dans le tableau.");
             return;
         }
 
         Medecin medecin = construireMedecinDepuisFormulaire();
         if (medecin == null) {
+            Toast.error(rootPane, "Format d'heure invalide. Utilisez HH:mm.");
             return;
         }
 
         try {
             medecinService.modifierMedecin(medecin);
-            AlertUtil.afficherSucces("Medecin modifie avec succes.");
+            Toast.success(rootPane, "Médecin modifié avec succès.");
             chargerMedecins();
             onNouveau();
 
         } catch (Exception e) {
-            AlertUtil.afficherErreur(e.getMessage());
+            Toast.error(rootPane, e.getMessage());
         }
     }
 
@@ -186,19 +190,19 @@ public class MedecinController implements Initializable {
     @FXML
     private void onSupprimer() {
         if (medecinSelectionne == null) {
-            AlertUtil.afficherErreur("Selectionnez d'abord un medecin dans le tableau.");
+            Toast.error(rootPane, "Sélectionnez d'abord un médecin dans le tableau.");
             return;
         }
 
         try {
             medecinService.supprimerMedecin(medecinSelectionne.getId());
 
-            AlertUtil.afficherSucces("Medecin supprime avec succes.");
+            Toast.success(rootPane, "Médecin supprimé avec succès.");
             chargerMedecins();
             onNouveau();
 
         } catch (Exception e) {
-            AlertUtil.afficherErreur(e.getMessage());
+            Toast.error(rootPane, e.getMessage());
         }
     }
 
@@ -209,7 +213,9 @@ public class MedecinController implements Initializable {
         Parent racine = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(racine));
+        Scene scene = new Scene(racine);
+        ThemeManager.applyToScene(scene);
+        stage.setScene(scene);
         stage.setTitle("Systeme de Gestion de Cabinet Medical");
     }
 }

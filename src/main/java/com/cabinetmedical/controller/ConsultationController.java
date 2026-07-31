@@ -2,7 +2,8 @@ package com.cabinetmedical.controller;
 
 import com.cabinetmedical.model.Consultation;
 import com.cabinetmedical.service.ConsultationService;
-import com.cabinetmedical.util.AlertUtil;
+import com.cabinetmedical.util.ThemeManager;
+import com.cabinetmedical.util.Toast;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,6 +37,7 @@ public class ConsultationController implements Initializable {
     @FXML private TextField champRdv;
     @FXML private TextArea champDiagnostic;
     @FXML private TextArea champOrdonnance;
+    @FXML private javafx.scene.layout.StackPane rootPane;
 
     private ConsultationService consultationService = new ConsultationService();
     private ObservableList<Consultation> listeConsultations = FXCollections.observableArrayList();
@@ -63,7 +65,7 @@ public class ConsultationController implements Initializable {
         try {
             listeConsultations.setAll(consultationService.listerToutesConsultations());
         } catch (Exception e) {
-            AlertUtil.afficherErreur("Impossible de charger les consultations : " + e.getMessage());
+            Toast.error(rootPane, "Impossible de charger les consultations : " + e.getMessage());
         }
     }
 
@@ -96,7 +98,7 @@ public class ConsultationController implements Initializable {
         try {
             consultation.setIdRdv(Integer.parseInt(champRdv.getText()));
         } catch (NumberFormatException e) {
-            AlertUtil.afficherErreur("L'identifiant du rendez-vous doit etre un nombre entier.");
+            Toast.error(rootPane, "L'identifiant du rendez-vous doit être un nombre entier.");
             return null;
         }
 
@@ -115,11 +117,11 @@ public class ConsultationController implements Initializable {
 
         try {
             consultationService.creerConsultation(consultation);
-            AlertUtil.afficherSucces("Consultation ajoutee avec succes.");
+            Toast.success(rootPane, "Consultation ajoutée avec succès.");
             chargerConsultations();
             onNouveau();
         } catch (Exception e) {
-            AlertUtil.afficherErreur(e.getMessage());
+            Toast.error(rootPane, e.getMessage());
         }
     }
 
@@ -127,7 +129,7 @@ public class ConsultationController implements Initializable {
     @FXML
     private void onModifier() {
         if (consultationSelectionnee == null) {
-            AlertUtil.afficherErreur("Selectionnez d'abord une consultation dans le tableau.");
+            Toast.error(rootPane, "Sélectionnez d'abord une consultation dans le tableau.");
             return;
         }
 
@@ -138,11 +140,11 @@ public class ConsultationController implements Initializable {
 
         try {
             consultationService.modifierConsultation(consultation);
-            AlertUtil.afficherSucces("Consultation modifiee avec succes.");
+            Toast.success(rootPane, "Consultation modifiée avec succès.");
             chargerConsultations();
             onNouveau();
         } catch (Exception e) {
-            AlertUtil.afficherErreur(e.getMessage());
+            Toast.error(rootPane, e.getMessage());
         }
     }
 
@@ -150,17 +152,17 @@ public class ConsultationController implements Initializable {
     @FXML
     private void onSupprimer() {
         if (consultationSelectionnee == null) {
-            AlertUtil.afficherErreur("Selectionnez d'abord une consultation dans le tableau.");
+            Toast.error(rootPane, "Sélectionnez d'abord une consultation dans le tableau.");
             return;
         }
 
         try {
             consultationService.supprimerConsultation(consultationSelectionnee.getId());
-            AlertUtil.afficherSucces("Consultation supprimee avec succes.");
+            Toast.success(rootPane, "Consultation supprimée avec succès.");
             chargerConsultations();
             onNouveau();
         } catch (Exception e) {
-            AlertUtil.afficherErreur(e.getMessage());
+            Toast.error(rootPane, e.getMessage());
         }
     }
 
@@ -171,7 +173,9 @@ public class ConsultationController implements Initializable {
         Parent racine = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(racine));
+        Scene scene = new Scene(racine);
+        ThemeManager.applyToScene(scene);
+        stage.setScene(scene);
         stage.setTitle("Systeme de Gestion de Cabinet Medical");
     }
 }

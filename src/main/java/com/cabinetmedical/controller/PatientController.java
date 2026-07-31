@@ -2,7 +2,8 @@ package com.cabinetmedical.controller;
 
 import com.cabinetmedical.model.Patient;
 import com.cabinetmedical.service.PatientService;
-import com.cabinetmedical.util.AlertUtil;
+import com.cabinetmedical.util.ThemeManager;
+import com.cabinetmedical.util.Toast;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -42,6 +43,7 @@ public class PatientController implements Initializable {
     @FXML private TextField champTelephone;
     @FXML private TextField champAdresse;
     @FXML private TextArea champAntecedents;
+    @FXML private javafx.scene.layout.StackPane rootPane;
 
     private PatientService patientService = new PatientService();
     private ObservableList<Patient> listePatients = FXCollections.observableArrayList();
@@ -71,7 +73,7 @@ public class PatientController implements Initializable {
         try {
             listePatients.setAll(patientService.listerTousPatients());
         } catch (Exception e) {
-            AlertUtil.afficherErreur("Impossible de charger les patients : " + e.getMessage());
+            Toast.error(rootPane, "Impossible de charger les patients : " + e.getMessage());
         }
     }
 
@@ -125,12 +127,12 @@ public class PatientController implements Initializable {
             Patient patient = construirePatientDepuisFormulaire();
             patientService.ajouterPatient(patient);
 
-            AlertUtil.afficherSucces("Patient ajoute avec succes.");
+            Toast.success(rootPane, "Patient ajouté avec succès.");
             chargerPatients();
             onNouveau();
 
         } catch (Exception e) {
-            AlertUtil.afficherErreur(e.getMessage());
+            Toast.error(rootPane, e.getMessage());
         }
     }
 
@@ -138,7 +140,7 @@ public class PatientController implements Initializable {
     @FXML
     private void onModifier() {
         if (patientSelectionne == null) {
-            AlertUtil.afficherErreur("Selectionnez d'abord un patient dans le tableau.");
+            Toast.error(rootPane, "Sélectionnez d'abord un patient dans le tableau.");
             return;
         }
 
@@ -146,12 +148,12 @@ public class PatientController implements Initializable {
             Patient patient = construirePatientDepuisFormulaire();
             patientService.modifierPatient(patient);
 
-            AlertUtil.afficherSucces("Patient modifie avec succes.");
+            Toast.success(rootPane, "Patient modifié avec succès.");
             chargerPatients();
             onNouveau();
 
         } catch (Exception e) {
-            AlertUtil.afficherErreur(e.getMessage());
+            Toast.error(rootPane, e.getMessage());
         }
     }
 
@@ -159,19 +161,19 @@ public class PatientController implements Initializable {
     @FXML
     private void onSupprimer() {
         if (patientSelectionne == null) {
-            AlertUtil.afficherErreur("Selectionnez d'abord un patient dans le tableau.");
+            Toast.error(rootPane, "Sélectionnez d'abord un patient dans le tableau.");
             return;
         }
 
         try {
             patientService.supprimerPatient(patientSelectionne.getId());
 
-            AlertUtil.afficherSucces("Patient supprime avec succes.");
+            Toast.success(rootPane, "Patient supprimé avec succès.");
             chargerPatients();
             onNouveau();
 
         } catch (Exception e) {
-            AlertUtil.afficherErreur(e.getMessage());
+            Toast.error(rootPane, e.getMessage());
         }
     }
 
@@ -182,7 +184,9 @@ public class PatientController implements Initializable {
         Parent racine = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(racine));
+        Scene scene = new Scene(racine);
+        ThemeManager.applyToScene(scene);
+        stage.setScene(scene);
         stage.setTitle("Systeme de Gestion de Cabinet Medical");
     }
 }

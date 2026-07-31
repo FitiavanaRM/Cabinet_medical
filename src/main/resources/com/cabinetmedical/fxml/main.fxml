@@ -7,17 +7,26 @@
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.cabinetmedical.controller.MainController">
+            fx:controller="com.cabinetmedical.controller.MainController"
+            stylesheets="@../css/style.css">
 
     <top>
-        <Label text="Systeme de Gestion de Cabinet Medical"
-               style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 10;"/>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="20" right="20" bottom="10" left="20"/>
+            </padding>
+
+            <Label text="Systeme de Gestion de Cabinet Medical"
+                   style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+            <Button fx:id="boutonTheme" text="Mode sombre" onAction="#onThemeToggle" maxWidth="140" prefWidth="140"/>
+        </VBox>
     </top>
 
     <left>
         <VBox spacing="10">
             <padding>
-                <Insets top="20" bottom="20" left="15" right="15"/>
+                <Insets top="10" bottom="20" left="20" right="20"/>
             </padding>
 
             <Label fx:id="labelUtilisateurConnecte" text="Connecte : ..." style="-fx-font-weight: bold;"/>

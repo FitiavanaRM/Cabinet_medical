@@ -2,7 +2,8 @@ package com.cabinetmedical.controller;
 
 import com.cabinetmedical.model.RendezVous;
 import com.cabinetmedical.service.RendezVousService;
-import com.cabinetmedical.util.AlertUtil;
+import com.cabinetmedical.util.ThemeManager;
+import com.cabinetmedical.util.Toast;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -43,6 +44,7 @@ public class RendezVousController implements Initializable {
     @FXML private DatePicker champDate;
     @FXML private TextField champHeure;
     @FXML private TextArea champMotif;
+    @FXML private javafx.scene.layout.StackPane rootPane;
 
     private RendezVousService rendezVousService = new RendezVousService();
     private ObservableList<RendezVous> listeRendezVous = FXCollections.observableArrayList();
@@ -72,7 +74,7 @@ public class RendezVousController implements Initializable {
         try {
             listeRendezVous.setAll(rendezVousService.listeRdv());
         } catch (Exception e) {
-            AlertUtil.afficherErreur("Impossible de charger les rendez-vous : " + e.getMessage());
+            Toast.error(rootPane, "Impossible de charger les rendez-vous : " + e.getMessage());
         }
     }
 
@@ -101,7 +103,7 @@ public class RendezVousController implements Initializable {
         try {
             heure = LocalTime.parse(champHeure.getText());
         } catch (DateTimeParseException e) {
-            AlertUtil.afficherErreur("Format d'heure invalide. Utilisez HH:mm, par exemple 15:00.");
+            Toast.error(rootPane, "Format d'heure invalide. Utilisez HH:mm, par exemple 15:00.");
             return null;
         }
 
@@ -114,7 +116,7 @@ public class RendezVousController implements Initializable {
             rdv.setIdPatient(Integer.parseInt(champPatient.getText()));
             rdv.setIdMedecin(Integer.parseInt(champMedecin.getText()));
         } catch (NumberFormatException e) {
-            AlertUtil.afficherErreur("Les identifiants patient et medecin doivent etre des nombres entiers.");
+            Toast.error(rootPane, "Les identifiants patient et médecin doivent être des nombres entiers.");
             return null;
         }
 
@@ -128,55 +130,57 @@ public class RendezVousController implements Initializable {
     private void onAjouter() {
         RendezVous rdv = construireRendezVousDepuisFormulaire();
         if (rdv == null) {
+            Toast.error(rootPane, "Format invalide ou identifiants incorrects.");
             return;
         }
 
         try {
             rendezVousService.creerRdv(rdv);
-            AlertUtil.afficherSucces("Rendez-vous ajoute avec succes.");
+            Toast.success(rootPane, "Rendez-vous ajouté avec succès.");
             chargerRendezVous();
             onNouveau();
         } catch (Exception e) {
-            AlertUtil.afficherErreur(e.getMessage());
+            Toast.error(rootPane, e.getMessage());
         }
     }
 
     @FXML
     private void onModifier() {
         if (rendezVousSelectionne == null) {
-            AlertUtil.afficherErreur("Selectionnez d'abord un rendez-vous dans le tableau.");
+            Toast.error(rootPane, "Sélectionnez d'abord un rendez-vous dans le tableau.");
             return;
         }
 
         RendezVous rdv = construireRendezVousDepuisFormulaire();
         if (rdv == null) {
+            Toast.error(rootPane, "Format invalide ou identifiants incorrects.");
             return;
         }
 
         try {
             rendezVousService.modifRdv(rdv);
-            AlertUtil.afficherSucces("Rendez-vous modifie avec succes.");
+            Toast.success(rootPane, "Rendez-vous modifié avec succès.");
             chargerRendezVous();
             onNouveau();
         } catch (Exception e) {
-            AlertUtil.afficherErreur(e.getMessage());
+            Toast.error(rootPane, e.getMessage());
         }
     }
 
     @FXML
     private void onSupprimer() {
         if (rendezVousSelectionne == null) {
-            AlertUtil.afficherErreur("Selectionnez d'abord un rendez-vous dans le tableau.");
+            Toast.error(rootPane, "Sélectionnez d'abord un rendez-vous dans le tableau.");
             return;
         }
 
         try {
             rendezVousService.supprimerRendezVous(rendezVousSelectionne.getId());
-            AlertUtil.afficherSucces("Rendez-vous supprime avec succes.");
+            Toast.success(rootPane, "Rendez-vous supprimé avec succès.");
             chargerRendezVous();
             onNouveau();
         } catch (Exception e) {
-            AlertUtil.afficherErreur(e.getMessage());
+            Toast.error(rootPane, e.getMessage());
         }
     }
 
@@ -186,7 +190,9 @@ public class RendezVousController implements Initializable {
         Parent racine = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(racine));
+        Scene scene = new Scene(racine);
+        ThemeManager.applyToScene(scene);
+        stage.setScene(scene);
         stage.setTitle("Systeme de Gestion de Cabinet Medical");
     }
 }
