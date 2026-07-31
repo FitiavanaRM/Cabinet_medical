@@ -46,8 +46,13 @@ public class MainController {
     }
 
     @FXML
-    private void onRendezVous() {
-        AlertUtil.afficherErreur("Ecran Rendez-vous pas encore implemente.");
+    private void onRendezVous(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/cabinetmedical/fxml/rendezvous.fxml"));
+        Parent racine = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(racine));
+        stage.setTitle("Systeme de Gestion de Cabinet Medical");
     }
 
     @FXML
