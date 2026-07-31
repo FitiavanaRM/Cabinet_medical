@@ -18,8 +18,11 @@ public class RendezVousService {
     }
 
     // rechercher un rdv par son Id
-    public List<RendezVous> rechercheRendezVousParId(int id) throws Exception {
-        return rendezVousDAO.findAll();
+    public RendezVous rechercheRendezVousParId(int id) throws Exception {
+        if (id <= 0) {
+            throw new Exception("L'identifiant du rendez-vous est invalide.");
+        }
+        return rendezVousDAO.findById(id);
     }
 
     // donne le rendez vous du patient
